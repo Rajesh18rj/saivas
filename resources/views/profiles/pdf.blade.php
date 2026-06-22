@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Saivas Profiles</title>
+
     <style>
+        @font-face {
+            font-family: 'TamilFont';
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{ storage_path('fonts/NotoSansTamil-Regular.ttf') }}") format("truetype");
+        }
+
         * {
             box-sizing: border-box;
             font-family: DejaVu Sans, sans-serif;
@@ -81,7 +89,7 @@
             margin-top: 14px;
         }
 
-        /* IMPORTANT: prevent repeated header on next page */
+        /* Prevent repeated table heading on next page */
         thead {
             display: table-row-group;
         }
@@ -90,11 +98,10 @@
             background: #f8fafc;
             color: #475569;
             font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: .05em;
             padding: 10px 8px;
             border: 1px solid #e2e8f0;
             text-align: left;
+            vertical-align: middle;
         }
 
         .profiles-table td {
@@ -124,6 +131,13 @@
             border-radius: 999px;
             font-size: 11px;
             font-weight: 700;
+        }
+
+        .tamil {
+            font-family: 'TamilFont';
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 1.35;
         }
     </style>
 </head>
@@ -206,16 +220,16 @@
     <thead>
     <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Father Name</th>
-        <th>DOB</th>
-        <th>Height</th>
-        <th>Salary</th>
-        <th>Star</th>
-        <th>Qualification</th>
-        <th>Occupation</th>
-        <th>Native Place</th>
-        <th>Job Location</th>
+        <th class="tamil">பெயர்</th>
+        <th class="tamil">தந்தை-பெயர்</th>
+        <th class="tamil">பிறந்த தேதி</th>
+        <th class="tamil">உயரம்</th>
+        <th class="tamil">சம்பளம்</th>
+        <th class="tamil">நட்சத்திரம்</th>
+        <th class="tamil">கல்வி</th>
+        <th class="tamil">வேலை</th>
+        <th class="tamil">சொந்த ஊர்</th>
+        <th class="tamil">பணியிடம்</th>
     </tr>
     </thead>
 
