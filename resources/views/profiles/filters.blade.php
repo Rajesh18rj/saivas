@@ -137,6 +137,47 @@
                         </div>
                     </div>
 
+                    {{-- Age --}}
+                    <div class="filter-dd relative" data-dd-name="Age">
+                        <button type="button" class="dd-btn inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:border-slate-300">
+                            <i class="fa-solid fa-user-clock text-[11px] text-amber-500"></i>
+                            <span class="dd-label">Age</span>
+                            <i class="dd-chevron fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i>
+                        </button>
+
+                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[10px] font-semibold text-slate-400">
+                    MIN
+                </span>
+                                    <input
+                                        type="number"
+                                        name="age_min"
+                                        value="{{ request('age_min') }}"
+                                        placeholder=""
+                                        min="1"
+                                        class="salary-input w-full rounded-lg border border-slate-200 py-2 pl-9 pr-2 text-sm outline-none focus:border-rose-400"
+                                    >
+                                </div>
+
+                                <div class="relative">
+                <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[10px] font-semibold text-slate-400">
+                    MAX
+                </span>
+                                    <input
+                                        type="number"
+                                        name="age_max"
+                                        value="{{ request('age_max') }}"
+                                        placeholder=""
+                                        min="1"
+                                        class="salary-input w-full rounded-lg border border-slate-200 py-2 pl-9 pr-2 text-sm outline-none focus:border-rose-400"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- Star --}}
                     <div class="filter-dd relative" data-dd-name="Star">
                         <button type="button" class="dd-btn inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:border-slate-300">

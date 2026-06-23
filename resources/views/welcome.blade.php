@@ -364,8 +364,8 @@
                         <p class="text-white/55 text-xs mt-1 leading-tight">Verified<br>Community</p>
                     </div>
                     <div class="stat-card px-4 py-4 text-center">
-                        <p class="font-display text-white text-2xl font-bold">Free</p>
-                        <p class="text-white/55 text-xs mt-1 leading-tight">Profile<br>Registration</p>
+                        <p class="font-display text-2xl font-bold text-white">Saiva</p>
+                        <p class="mt-1 text-xs leading-tight text-white/55">Community<br>Focused</p>
                     </div>
                 </div>
             </div>
@@ -407,7 +407,7 @@
 
                     <a href="#" class="mt-5 btn-primary w-full justify-center">
                         <i class="fa-solid fa-user-plus text-sm"></i>
-                        Register Now — It's Free
+                        Register Now
                     </a>
                 </div>
             </div>
@@ -504,7 +504,7 @@
                     </div>
                     <div class="feature-card p-5">
                         <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: #EEF2FF;">
-                            <i class="fa-solid fa-hands-holding-heart text-lg" style="color: #4F46E5;"></i>
+                            <i class="fa-solid fa-people-group text-lg" style="color: #4F46E5;"></i>
                         </div>
                         <h3 class="mt-4 font-bold text-slate-800">Community Focused</h3>
                         <p class="mt-2 text-sm leading-7 text-slate-500">Built specifically for the Saiva community's traditions, values, and matching needs.</p>
@@ -540,8 +540,8 @@
                     </div>
                 </div>
                 <p class="text-sm leading-7 text-slate-500">Visit the platform and open the matrimony registration form to begin your profile creation journey.</p>
-                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=600&auto=format&fit=crop"
-                     alt="Open form" class="mt-5 w-full h-36 object-cover rounded-xl" loading="lazy">
+                <img src="{{ asset('images/register.jpg') }}"
+                     alt="Open form" class="mt-5 w-full h-36 object-cover rounded-xl">
             </div>
 
             {{-- Step 2 --}}
@@ -556,8 +556,8 @@
                     </div>
                 </div>
                 <p class="text-sm leading-7 text-slate-500">Enter personal, family, education, salary, horoscope star and location details into the guided form.</p>
-                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=600&auto=format&fit=crop"
-                     alt="Fill details" class="mt-5 w-full h-36 object-cover rounded-xl" loading="lazy">
+                <img src="{{ asset('images/fill.jpg') }}"
+                     alt="Fill details" class="mt-5 w-full h-36 object-cover rounded-xl">
             </div>
 
             {{-- Step 3 --}}
@@ -572,8 +572,8 @@
                     </div>
                 </div>
                 <p class="text-sm leading-7 text-slate-500">Review and submit your profile. It will be visible to our community for matrimony matching right away.</p>
-                <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?q=80&w=600&auto=format&fit=crop"
-                     alt="Submit profile" class="mt-5 w-full h-36 object-cover rounded-xl" loading="lazy">
+                <img src="{{ asset('images/submit.jpg') }}"
+                     alt="Submit profile" class="mt-5 w-full h-36 object-cover rounded-xl">
             </div>
         </div>
     </div>

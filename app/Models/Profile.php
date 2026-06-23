@@ -13,6 +13,11 @@ class Profile extends Model
         'salary' => 'decimal:2',
     ];
 
+    public function getAgeAttribute()
+    {
+        return $this->dob?->age;
+    }
+
     public function gender()
     {
         return $this->belongsTo(Gender::class);

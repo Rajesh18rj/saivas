@@ -27,6 +27,11 @@ return new class extends Migration
 
             $table->foreignId('native_place_id')->nullable()->constrained('native_places');
             $table->foreignId('working_place_id')->nullable()->constrained('working_places');
+
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_paid')->default(false);
+            $table->text('inactive_reason')->nullable();
+
             $table->timestamps();
         });
     }

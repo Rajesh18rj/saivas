@@ -83,6 +83,8 @@ class ProfilesSeeder extends Seeder
                 'occupation_id' => $occupationIds[array_rand($occupationIds)],
                 'native_place_id' => $nativePlaceIds[array_rand($nativePlaceIds)],
                 'working_place_id' => $workingPlaceIds[array_rand($workingPlaceIds)],
+                'is_paid' => true,
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -104,6 +106,8 @@ class ProfilesSeeder extends Seeder
                 'occupation_id' => $occupationIds[array_rand($occupationIds)],
                 'native_place_id' => $nativePlaceIds[array_rand($nativePlaceIds)],
                 'working_place_id' => $workingPlaceIds[array_rand($workingPlaceIds)],
+                'is_paid' => true,
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

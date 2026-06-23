@@ -5,13 +5,6 @@
     <title>Saivas Profiles</title>
 
     <style>
-        @font-face {
-            font-family: 'TamilFont';
-            font-style: normal;
-            font-weight: normal;
-            src: url("{{ storage_path('fonts/NotoSansTamil-Regular.ttf') }}") format("truetype");
-        }
-
         * {
             box-sizing: border-box;
             font-family: DejaVu Sans, sans-serif;
@@ -79,10 +72,6 @@
             color: #475569;
         }
 
-        .muted {
-            color: #94a3b8;
-        }
-
         .profiles-table {
             width: 100%;
             border-collapse: collapse;
@@ -102,6 +91,7 @@
             border: 1px solid #e2e8f0;
             text-align: left;
             vertical-align: middle;
+            font-weight: 700;
         }
 
         .profiles-table td {
@@ -131,13 +121,6 @@
             border-radius: 999px;
             font-size: 11px;
             font-weight: 700;
-        }
-
-        .tamil {
-            font-family: 'TamilFont';
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 1.35;
         }
     </style>
 </head>
@@ -196,7 +179,7 @@
 
         <tr>
             <td class="filters-label">Salary Range</td>
-            <td class="filters-value" colspan="3">
+            <td class="filters-value">
                 @php
                     $salaryMin = $appliedFilters['salary_min'] ?? null;
                     $salaryMax = $appliedFilters['salary_max'] ?? null;
@@ -212,6 +195,24 @@
                     —
                 @endif
             </td>
+
+            <td class="filters-label">Age Range</td>
+            <td class="filters-value">
+                @php
+                    $ageMin = $appliedFilters['age_min'] ?? null;
+                    $ageMax = $appliedFilters['age_max'] ?? null;
+                @endphp
+
+                @if ($ageMin && $ageMax)
+                    {{ $ageMin }} - {{ $ageMax }} years
+                @elseif ($ageMin)
+                    From {{ $ageMin }} years
+                @elseif ($ageMax)
+                    Up to {{ $ageMax }} years
+                @else
+                    —
+                @endif
+            </td>
         </tr>
     </table>
 </div>
@@ -220,16 +221,17 @@
     <thead>
     <tr>
         <th>#</th>
-        <th class="tamil">பெயர்</th>
-        <th class="tamil">தந்தை-பெயர்</th>
-        <th class="tamil">பிறந்த தேதி</th>
-        <th class="tamil">உயரம்</th>
-        <th class="tamil">சம்பளம்</th>
-        <th class="tamil">நட்சத்திரம்</th>
-        <th class="tamil">கல்வி</th>
-        <th class="tamil">வேலை</th>
-        <th class="tamil">சொந்த ஊர்</th>
-        <th class="tamil">பணியிடம்</th>
+        <th>Name</th>
+        <th>Father Name</th>
+        <th>DOB</th>
+        <th>Age</th>
+        <th>Height</th>
+        <th>Salary</th>
+        <th>Star</th>
+        <th>Qualification</th>
+        <th>Occupation</th>
+        <th>Native Place</th>
+        <th>Job Location</th>
     </tr>
     </thead>
 
@@ -240,6 +242,7 @@
             <td class="name">{{ $profile->name }}</td>
             <td>{{ $profile->father_name ?? '—' }}</td>
             <td>{{ $profile->dob ? $profile->dob->format('d-m-Y') : '—' }}</td>
+            <td>{{ $profile->age ?? '—' }}</td>
             <td>{{ $profile->height ?? '—' }}</td>
             <td>{{ $profile->salary ? number_format($profile->salary, 2) : '—' }}</td>
             <td>{{ $profile->star->name ?? '—' }}</td>

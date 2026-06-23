@@ -358,7 +358,7 @@ class ProfilesController extends Controller
         // NATIVE PLACE (MULTIPLE)
         // =====================================================
         if ($request->filled('native_place_id')) {
-            $nativePlaceIds = array_filter((array)$request->native_place_id);
+            $nativePlaceIds = array_filter((array) $request->native_place_id);
 
             if (!empty($nativePlaceIds)) {
                 $query->whereIn('native_place_id', $nativePlaceIds);
@@ -369,7 +369,7 @@ class ProfilesController extends Controller
         // QUALIFICATION (MULTIPLE)
         // =====================================================
         if ($request->filled('education_qualification_id')) {
-            $educationIds = array_filter((array)$request->education_qualification_id);
+            $educationIds = array_filter((array) $request->education_qualification_id);
 
             if (!empty($educationIds)) {
                 $query->whereIn('education_qualification_id', $educationIds);
@@ -380,7 +380,7 @@ class ProfilesController extends Controller
         // JOB LOCATION / WORKING PLACE (MULTIPLE)
         // =====================================================
         if ($request->filled('working_place_id')) {
-            $workingPlaceIds = array_filter((array)$request->working_place_id);
+            $workingPlaceIds = array_filter((array) $request->working_place_id);
 
             if (!empty($workingPlaceIds)) {
                 $query->whereIn('working_place_id', $workingPlaceIds);
@@ -391,7 +391,7 @@ class ProfilesController extends Controller
         // STAR (MULTIPLE)
         // =====================================================
         if ($request->filled('star_id')) {
-            $starIds = array_filter((array)$request->star_id);
+            $starIds = array_filter((array) $request->star_id);
 
             if (!empty($starIds)) {
                 $query->whereIn('star_id', $starIds);
@@ -410,7 +410,33 @@ class ProfilesController extends Controller
         }
 
         // =====================================================
+        // AGE RANGE
+        // age_min = minimum age user wants
+        // age_max = maximum age user wants
+        // =====================================================
+        if ($request->filled('age_min')) {
+            $ageMin = (int) $request->age_min;
+
+            // Person must be at least this age
+            // Example: age_min 25 => dob <= today - 25 years
+            $maxDob = now()->subYears($ageMin)->endOfDay();
+
+            $query->whereDate('dob', '<=', $maxDob);
+        }
+
+        if ($request->filled('age_max')) {
+            $ageMax = (int) $request->age_max;
+
+            // Person must not be older than this age
+            // Example: age_max 30 => dob >= today - 30 years
+            $minDob = now()->subYears($ageMax + 1)->addDay()->startOfDay();
+
+            $query->whereDate('dob', '>=', $minDob);
+        }
+
+        // =====================================================
         // CHECK IF ANY FILTER / SEARCH IS APPLIED
+        // IMPORTANT: age_min and age_max added here
         // =====================================================
         $hasActiveFilters =
             $request->filled('search') ||
@@ -419,7 +445,9 @@ class ProfilesController extends Controller
             $request->filled('working_place_id') ||
             $request->filled('star_id') ||
             $request->filled('salary_min') ||
-            $request->filled('salary_max');
+            $request->filled('salary_max') ||
+            $request->filled('age_min') ||
+            $request->filled('age_max');
 
         // =====================================================
         // DEFAULT TO 10 IF FILTERS APPLIED AND COUNT MISSING
@@ -434,7 +462,7 @@ class ProfilesController extends Controller
         // LOAD RANDOM FILTERED RESULTS
         // =====================================================
         if ($hasActiveFilters || $request->filled('profile_count')) {
-            $count = (int)$request->get('profile_count', 10);
+            $count = (int) $request->get('profile_count', 10);
 
             if (!in_array($count, [10, 15, 20])) {
                 $count = 10;
@@ -487,6 +515,7 @@ class ProfilesController extends Controller
         // SELECTED GENDER
         // =====================================================
         $selectedGender = null;
+
         if ($request->filled('gender_id')) {
             $selectedGender = Gender::find($request->gender_id);
         }
@@ -512,6 +541,10 @@ class ProfilesController extends Controller
 
         $salaryMin = $request->input('salary_min');
         $salaryMax = $request->input('salary_max');
+
+        $ageMin = $request->input('age_min');
+        $ageMax = $request->input('age_max');
+
         $profileCount = (int) $request->input('profile_count', $profiles->count());
 
         $appliedFilters = [
@@ -522,6 +555,8 @@ class ProfilesController extends Controller
             'stars' => $starNames,
             'salary_min' => $salaryMin,
             'salary_max' => $salaryMax,
+            'age_min' => $ageMin,
+            'age_max' => $ageMax,
             'profile_count' => $profileCount,
         ];
 
@@ -532,5 +567,4 @@ class ProfilesController extends Controller
         ])->setPaper('a4', 'landscape');
 
         return $pdf->download('saivas-profiles.pdf');
-    }
-}
+    }}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManageProfilesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profiles', [ProfilesController::class, 'index'])->name('profiles.index');
     Route::post('/profiles/print', [ProfilesController::class, 'print'])->name('profiles.print');
+
+    Route::get('/manage-profiles', [ManageProfilesController::class, 'index'])
+        ->name('manage-profiles.index');
 });
 
 require __DIR__.'/auth.php';

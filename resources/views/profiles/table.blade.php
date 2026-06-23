@@ -11,6 +11,8 @@
         request()->filled('star_id') ||
         request()->filled('salary_min') ||
         request()->filled('salary_max');
+        request()->filled('age_min') ||
+        request()->filled('age_max');
 @endphp
 
 <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -115,6 +117,14 @@
                             <input type="hidden" name="salary_max" value="{{ request('salary_max') }}">
                         @endif
 
+                        @if (request()->filled('age_min'))
+                            <input type="hidden" name="age_min" value="{{ request('age_min') }}">
+                        @endif
+
+                        @if (request()->filled('age_max'))
+                            <input type="hidden" name="age_max" value="{{ request('age_max') }}">
+                        @endif
+
                         <div class="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
                             <span class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
                                 Show
@@ -203,6 +213,7 @@
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">பெயர்</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">தந்தை பெயர்</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">பிறந்த தேதி</th>
+                <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">வயது</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">உயரம்</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">சம்பளம்</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">நட்சத்திரம்</th>
@@ -230,6 +241,10 @@
 
                     <td class="px-5 py-4 align-top text-slate-600">
                         {{ $profile->dob ? $profile->dob->format('d-m-Y') : '—' }}
+                    </td>
+
+                    <td class="px-5 py-4 align-top text-slate-600">
+                        {{ $profile->dob ? $profile->dob->age : '—' }}
                     </td>
 
                     <td class="px-5 py-4 align-top text-slate-600">
