@@ -111,19 +111,44 @@
                                     data-working_place="{{ $profile->workingPlace->name ?? '—' }}"
                                     data-is_active="{{ $profile->is_active ? 1 : 0 }}"
                                     data-is_paid="{{ $profile->is_paid ? 1 : 0 }}"
-                                    data-inactive_reason="{{ $profile->inactive_reason ?? '—' }}">
+                                    data-inactive_reason="{{ $profile->inactive_reason ?? '—' }}"
+                                    data-contacts='@json($profile->contacts ?? [])'>
                                 <i class="fa-solid fa-eye text-[11px]"></i>
                             </button>
 
                             {{-- EDIT --}}
+                            @php
+                                $editContacts = $profile->contacts->map(function ($contact) {
+                                    return [
+                                        'name' => $contact->name,
+                                        'relationship' => $contact->relationship,
+                                        'mobile' => $contact->mobile,
+                                    ];
+                                })->values()->toArray();
+                            @endphp
+
                             <button type="button"
-                                    class="edit-profile-btn inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-semibold text-orange-700 transition hover:bg-emerald-100"
+                                    class="edit-profile-btn inline-flex items-center gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-700 transition hover:bg-amber-100"
                                     data-id="{{ $profile->id }}"
-                                    data-name="{{ $profile->name }}"
+                                    data-name="{{ $profile->name ?? '' }}"
                                     data-father_name="{{ $profile->father_name ?? '' }}"
+
+                                    data-dob_raw="{{ $profile->dob ? \Carbon\Carbon::parse($profile->dob)->format('Y-m-d') : '' }}"
+                                    data-height="{{ $profile->height ?? '' }}"
+                                    data-salary_raw="{{ $profile->salary ?? '' }}"
+
+                                    data-gender_id="{{ $profile->gender_id ?? '' }}"
+                                    data-star_id="{{ $profile->star_id ?? '' }}"
+                                    data-education_qualification_id="{{ $profile->education_qualification_id ?? '' }}"
+                                    data-occupation_id="{{ $profile->occupation_id ?? '' }}"
+                                    data-native_place_id="{{ $profile->native_place_id ?? '' }}"
+                                    data-working_place_id="{{ $profile->working_place_id ?? '' }}"
+
                                     data-is_active="{{ $profile->is_active ? 1 : 0 }}"
                                     data-is_paid="{{ $profile->is_paid ? 1 : 0 }}"
-                                    data-inactive_reason="{{ $profile->inactive_reason ?? '' }}">
+                                    data-inactive_reason="{{ $profile->inactive_reason ?? '' }}"
+
+                                    data-contacts='@json($editContacts)'>
                                 <i class="fa-solid fa-pen-to-square text-[11px]"></i>
                             </button>
 

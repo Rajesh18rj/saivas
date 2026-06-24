@@ -29,6 +29,53 @@
     </div>
 </div>
 
+
+@if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: @json(session('success')),
+                showConfirmButton: false,
+                timer: 2800,
+                timerProgressBar: true,
+                background: '#f0fdf4',
+                color: '#14532d',
+                iconColor: '#22c55e',
+                customClass: {
+                    popup: 'rounded-2xl border border-emerald-200 shadow-[0_18px_45px_rgba(16,185,129,0.18)] px-3 py-2',
+                    title: 'text-sm font-semibold'
+                }
+            });
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: @json(session('error')),
+                showConfirmButton: false,
+                timer: 3200,
+                timerProgressBar: true,
+                background: '#fef2f2',
+                color: '#991b1b',
+                iconColor: '#ef4444',
+                customClass: {
+                    popup: 'rounded-2xl border border-rose-200 shadow-[0_18px_45px_rgba(239,68,68,0.16)] px-3 py-2',
+                    title: 'text-sm font-semibold'
+                }
+            });
+        });
+    </script>
+@endif
+
     @stack('scripts')
 </body>
 </html>

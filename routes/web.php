@@ -22,8 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profiles', [ProfilesController::class, 'index'])->name('profiles.index');
     Route::post('/profiles/print', [ProfilesController::class, 'print'])->name('profiles.print');
 
-    Route::get('/manage-profiles', [ManageProfilesController::class, 'index'])
-        ->name('manage-profiles.index');
+    Route::get('/manage-profiles', [ManageProfilesController::class, 'index'])->name('manage-profiles.index');
+    Route::post('/manage-profiles', [ManageProfilesController::class, 'store'])->name('manage-profiles.store');
+    Route::put('/manage-profiles/{profile}', [ManageProfilesController::class, 'update'])->name('manage-profiles.update');
+    Route::delete('/manage-profiles/{profile}', [ManageProfilesController::class, 'destroy'])->name('manage-profiles.destroy');
 });
 
 require __DIR__.'/auth.php';
