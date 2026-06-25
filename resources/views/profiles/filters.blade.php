@@ -53,30 +53,37 @@
                 {{-- Dropdown filter row --}}
                 <div class="flex flex-wrap items-center gap-2">
 
-                    {{-- Native Place --}}
-                    <div class="filter-dd relative" data-dd-name="Native place">
+                    {{-- Salary --}}
+                    <div class="filter-dd relative" data-dd-name="Salary">
                         <button type="button" class="dd-btn inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:border-slate-300">
-                            <i class="fa-solid fa-location-dot text-[11px] text-amber-500"></i>
-                            <span class="dd-label">Native place</span>
+                            <i class="fa-solid fa-indian-rupee-sign text-[11px] text-amber-500"></i>
+                            <span class="dd-label">Salary</span>
                             <i class="dd-chevron fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i>
                         </button>
-                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
-                            <div class="pop-scroll max-h-52 space-y-0.5 overflow-y-auto pr-1">
-                                @foreach ($nativePlaces as $nativePlace)
-                                    <label class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-slate-600 hover:bg-rose-50/60">
-                                    <span class="chk-wrap">
-                                        <input
-                                            type="checkbox"
-                                            class="dd-input"
-                                            name="native_place_id[]"
-                                            value="{{ $nativePlace->id }}"
-                                            @checked(in_array($nativePlace->id, (array) request('native_place_id', [])))
-                                        >
-                                        <span class="chk-box"><i class="fa-solid fa-check"></i></span>
-                                    </span>
-                                        {{ $nativePlace->name }}
-                                    </label>
-                                @endforeach
+                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="relative">
+                                    <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[10px] font-semibold text-slate-400">MIN</span>
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="salary_min"
+                                        value="{{ request('salary_min') }}"
+                                        placeholder="0"
+                                        class="salary-input w-full rounded-lg border border-slate-200 py-2 pl-9 pr-2 text-sm outline-none focus:border-rose-400"
+                                    >
+                                </div>
+                                <div class="relative">
+                                    <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[10px] font-semibold text-slate-400">MAX</span>
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="salary_max"
+                                        value="{{ request('salary_max') }}"
+                                        placeholder="0"
+                                        class="salary-input w-full rounded-lg border border-slate-200 py-2 pl-9 pr-2 text-sm outline-none focus:border-rose-400"
+                                    >
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,34 +110,6 @@
                                         <span class="chk-box"><i class="fa-solid fa-check"></i></span>
                                     </span>
                                         {{ $education->name }}
-                                    </label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Job Location --}}
-                    <div class="filter-dd relative" data-dd-name="Job location">
-                        <button type="button" class="dd-btn inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:border-slate-300">
-                            <i class="fa-solid fa-briefcase text-[11px] text-amber-500"></i>
-                            <span class="dd-label">Job location</span>
-                            <i class="dd-chevron fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i>
-                        </button>
-                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
-                            <div class="pop-scroll max-h-52 space-y-0.5 overflow-y-auto pr-1">
-                                @foreach ($workingPlaces as $workingPlace)
-                                    <label class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-slate-600 hover:bg-rose-50/60">
-                                    <span class="chk-wrap">
-                                        <input
-                                            type="checkbox"
-                                            class="dd-input"
-                                            name="working_place_id[]"
-                                            value="{{ $workingPlace->id }}"
-                                            @checked(in_array($workingPlace->id, (array) request('working_place_id', [])))
-                                        >
-                                        <span class="chk-box"><i class="fa-solid fa-check"></i></span>
-                                    </span>
-                                        {{ $workingPlace->name }}
                                     </label>
                                 @endforeach
                             </div>
@@ -206,41 +185,62 @@
                         </div>
                     </div>
 
-                    {{-- Salary --}}
-                    <div class="filter-dd relative" data-dd-name="Salary">
+                    {{-- Job Location --}}
+                    <div class="filter-dd relative" data-dd-name="Job location">
                         <button type="button" class="dd-btn inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:border-slate-300">
-                            <i class="fa-solid fa-indian-rupee-sign text-[11px] text-amber-500"></i>
-                            <span class="dd-label">Salary</span>
+                            <i class="fa-solid fa-briefcase text-[11px] text-amber-500"></i>
+                            <span class="dd-label">Job location</span>
                             <i class="dd-chevron fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i>
                         </button>
-                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg">
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="relative">
-                                    <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[10px] font-semibold text-slate-400">MIN</span>
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        name="salary_min"
-                                        value="{{ request('salary_min') }}"
-                                        placeholder="0"
-                                        class="salary-input w-full rounded-lg border border-slate-200 py-2 pl-9 pr-2 text-sm outline-none focus:border-rose-400"
-                                    >
-                                </div>
-                                <div class="relative">
-                                    <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-[10px] font-semibold text-slate-400">MAX</span>
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        name="salary_max"
-                                        value="{{ request('salary_max') }}"
-                                        placeholder="0"
-                                        class="salary-input w-full rounded-lg border border-slate-200 py-2 pl-9 pr-2 text-sm outline-none focus:border-rose-400"
-                                    >
-                                </div>
+                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
+                            <div class="pop-scroll max-h-52 space-y-0.5 overflow-y-auto pr-1">
+                                @foreach ($workingPlaces as $workingPlace)
+                                    <label class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-slate-600 hover:bg-rose-50/60">
+                                    <span class="chk-wrap">
+                                        <input
+                                            type="checkbox"
+                                            class="dd-input"
+                                            name="working_place_id[]"
+                                            value="{{ $workingPlace->id }}"
+                                            @checked(in_array($workingPlace->id, (array) request('working_place_id', [])))
+                                        >
+                                        <span class="chk-box"><i class="fa-solid fa-check"></i></span>
+                                    </span>
+                                        {{ $workingPlace->name }}
+                                    </label>
+                                @endforeach
                             </div>
                         </div>
                     </div>
 
+                    {{-- Native Place --}}
+                    <div class="filter-dd relative" data-dd-name="Native place">
+                        <button type="button" class="dd-btn inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:border-slate-300">
+                            <i class="fa-solid fa-location-dot text-[11px] text-amber-500"></i>
+                            <span class="dd-label">Native place</span>
+                            <i class="dd-chevron fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform"></i>
+                        </button>
+                        <div class="filter-pop w-64 rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
+                            <div class="pop-scroll max-h-52 space-y-0.5 overflow-y-auto pr-1">
+                                @foreach ($nativePlaces as $nativePlace)
+                                    <label class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-slate-600 hover:bg-rose-50/60">
+                                    <span class="chk-wrap">
+                                        <input
+                                            type="checkbox"
+                                            class="dd-input"
+                                            name="native_place_id[]"
+                                            value="{{ $nativePlace->id }}"
+                                            @checked(in_array($nativePlace->id, (array) request('native_place_id', [])))
+                                        >
+                                        <span class="chk-box"><i class="fa-solid fa-check"></i></span>
+                                    </span>
+                                        {{ $nativePlace->name }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 {{-- Actions --}}

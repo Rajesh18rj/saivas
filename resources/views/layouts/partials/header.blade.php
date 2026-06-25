@@ -34,11 +34,11 @@
                                 'subtitle' => 'Manage profiles, filters, and matrimony records from one place',
                             ],
 
-                            'manage_profiles' => [
+                            'manage profiles' => [
                                 'icon' => 'fa-user-gear',
                                 'iconBg' => 'from-emerald-500 via-teal-500 to-cyan-500',
                                 'shadow' => 'shadow-emerald-200/60',
-                                'badge' => 'Manage_Profiles',
+                                'badge' => 'Manage Profiles',
                                 'badgeClass' => 'border-emerald-100 bg-emerald-50 text-emerald-600',
                                 'subtitle' => 'Manage profile records, active status, paid members, and profile actions from one place',
                             ],

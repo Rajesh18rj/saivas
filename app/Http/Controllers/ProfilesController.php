@@ -318,7 +318,9 @@ class ProfilesController extends Controller
             'occupation',
             'nativePlace',
             'workingPlace',
-        ]);
+        ])
+            ->where('is_active', true)
+            ->where('is_paid', true);
 
         $profiles = collect();
 
@@ -502,6 +504,8 @@ class ProfilesController extends Controller
             'nativePlace',
             'workingPlace',
         ])
+            ->where('is_active', true)
+            ->where('is_paid', true)
             ->whereIn('id', $profileIds)
             ->get();
 

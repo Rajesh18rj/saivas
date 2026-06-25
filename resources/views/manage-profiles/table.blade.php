@@ -154,7 +154,7 @@
 
                             {{-- DELETE --}}
                             <button type="button"
-                                    class="delete-profile-btn inline-flex items-center gap-2 rounded-xl bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700 transition hover:bg-rose-100"
+                                    class="hidden delete-profile-btn inline-flex items-center gap-2 rounded-xl bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700 transition hover:bg-rose-100"
                                     data-id="{{ $profile->id }}"
                                     data-name="{{ $profile->name }}">
                                 <i class="fa-solid fa-trash text-[11px]"></i>
@@ -183,7 +183,7 @@
 
     @if ($profiles->count())
         <div class="border-t border-slate-200 px-5 py-4">
-            {{ $profiles->links() }}
+            {{ $profiles->links('components.pagination.manage-profiles-pagination') }}
         </div>
     @endif
 </div>

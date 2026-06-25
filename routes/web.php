@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ManageProfilesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileRegistrationController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/manage-profiles/{profile}', [ManageProfilesController::class, 'update'])->name('manage-profiles.update');
     Route::delete('/manage-profiles/{profile}', [ManageProfilesController::class, 'destroy'])->name('manage-profiles.destroy');
 });
+
+Route::get('/register-profile', [ProfileRegistrationController::class, 'create'])->name('profile-register.create');
+Route::post('/register-profile', [ProfileRegistrationController::class, 'store'])->name('profile-register.store');
 
 require __DIR__.'/auth.php';

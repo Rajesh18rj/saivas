@@ -2,7 +2,7 @@
 
 @php
     $title = 'Manage Profiles';
-    $pageTitle = 'Manage_Profiles';
+    $pageTitle = 'Manage Profiles';
 @endphp
 
 @section('content')
@@ -11,17 +11,41 @@
     <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
         {{-- LEFT : SEARCH BAR --}}
-        <div class="w-full lg:max-w-md">
-            <form method="GET" action="{{ route('manage-profiles.index') }}" class="relative">
-                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
-                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                </span>
+        <div class="w-full lg:max-w-xl">
+            <form method="GET"
+                  action="{{ route('manage-profiles.index') }}"
+                  id="profileSearchForm"
+                  class="flex flex-col gap-3 sm:flex-row sm:items-center">
 
-                <input type="text"
-                       name="search"
-                       value="{{ request('search') }}"
-                       placeholder="Search by name or father name..."
-                       class="h-12 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-700 shadow-sm outline-none transition focus:border-emerald-300 focus:ring-4 focus:ring-emerald-100">
+                <div class="relative flex-1">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                <i class="fa-solid fa-magnifying-glass text-sm"></i>
+            </span>
+
+                    <input type="text"
+                           name="search"
+                           id="profileSearchInput"
+                           value="{{ request('search') }}"
+                           placeholder="Search by name or father name..."
+                           autocomplete="off"
+                           class="h-12 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-10 text-sm text-slate-700 shadow-sm outline-none transition focus:border-emerald-300 focus:ring-4 focus:ring-emerald-100">
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button type="submit"
+                            class="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-sky-200 bg-sky-50 px-4 text-sm font-semibold text-sky-700 shadow-sm transition hover:bg-sky-100 hover:text-sky-800">
+                        <i class="fa-solid fa-magnifying-glass text-[11px]"></i>
+                        Search
+                    </button>
+
+                    @if(request('search'))
+                        <a href="{{ route('manage-profiles.index') }}"
+                           class="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 text-sm font-semibold text-rose-600 shadow-sm transition hover:bg-rose-100 hover:text-rose-700">
+                            <i class="fa-solid fa-xmark text-[11px]"></i>
+                            Clear
+                        </a>
+                    @endif
+                </div>
             </form>
         </div>
 
