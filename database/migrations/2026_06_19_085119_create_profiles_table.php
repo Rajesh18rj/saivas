@@ -28,6 +28,10 @@ return new class extends Migration
             $table->foreignId('native_place_id')->nullable()->constrained('native_places');
             $table->foreignId('working_place_id')->nullable()->constrained('working_places');
 
+            $table->enum('payment_type', ['none', 'online', 'upi', 'direct',])->default('none');
+            $table->string('payment_proof')->nullable();
+
+
             $table->boolean('is_active')->default(true);
             $table->boolean('is_paid')->default(false);
             $table->text('inactive_reason')->nullable();

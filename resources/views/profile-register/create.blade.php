@@ -6,16 +6,14 @@
 @endphp
 
 @section('content')
-    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-[1550px] px-4 py-0 sm:px-6 lg:px-8">
 
-        {{-- ===================================================== --}}
+        <div class="relative overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 px-10 py-10">
+
         {{-- PAGE HERO --}}
-        {{-- ===================================================== --}}
         @include('profile-register.hero-section')
 
-        {{-- ===================================================== --}}
         {{-- FORM --}}
-        {{-- ===================================================== --}}
         <form method="POST" action="{{ route('profile-register.store') }}" class="mt-8 space-y-8" id="profileRegisterForm">
             @csrf
 
@@ -227,6 +225,7 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 @endsection
 
