@@ -37,7 +37,7 @@
             min-height: 100svh;
             background:
                 linear-gradient(160deg, rgba(28, 20, 16, 0.82) 0%, rgba(155, 28, 28, 0.55) 60%, rgba(200, 134, 10, 0.35) 100%),
-                url('https://images.unsplash.com/photo-1601136591272-21f3e5f68abe?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+                url('{{  asset('images/') }}') center/cover no-repeat;
             position: relative;
             overflow: hidden;
         }
@@ -289,16 +289,11 @@
 
             {{-- LOGO SLOT + BRAND --}}
             <a href="/" class="flex items-center gap-3 min-w-0">
-                {{-- ★ DROP YOUR LOGO IMAGE HERE ★
-                     Replace this div with:
-                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 w-12 rounded-xl object-contain">
-                --}}
-                <div class="logo-slot">
-                    <span>Your<br>Logo</span>
-                </div>
+                     <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="h-12 w-12 rounded-xl object-contain">
+
                 <div class="min-w-0">
-                    <p class="font-display text-white font-bold text-base sm:text-lg leading-tight tracking-tight truncate">
-                        Saivaperumakkalperavai
+                    <p class="font-sans text-white font-bold text-base sm:text-lg leading-tight tracking-tight truncate">
+                        Saiva Perumakkal Peravai
                     </p>
                     <p class="text-[10px] font-medium uppercase tracking-widest text-white/50 truncate">
                         Matrimony Registration
@@ -314,7 +309,7 @@
             </nav>
 
             {{-- MOBILE CTA --}}
-            <a href="#" class="btn-primary md:hidden !py-2 !px-4 !text-sm">
+            <a href="{{ route('profile-register.create') }}" class="btn-primary md:hidden !py-2 !px-4 !text-sm">
                 <i class="fa-solid fa-user-plus text-xs"></i>
                 Register
             </a>
@@ -343,7 +338,7 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="#" class="btn-primary">
+                    <a href="{{ route('profile-register.create') }}" class="btn-primary">
                         <i class="fa-solid fa-address-card text-sm"></i>
                         Register Your Profile
                     </a>
@@ -405,7 +400,7 @@
                         @endforeach
                     </div>
 
-                    <a href="#" class="mt-5 btn-primary w-full justify-center">
+                    <a href="{{ route('profile-register.create') }}" class="mt-5 btn-primary w-full justify-center">
                         <i class="fa-solid fa-user-plus text-sm"></i>
                         Register Now
                     </a>
@@ -457,6 +452,11 @@
                     <img class="span-2" src="{{ asset('images/img4.jpg') }}" alt="Wedding decoration" >
                     <img src="{{ asset('images/img5.jpg') }}" alt="Floral mandap">
                     <img src="{{ asset('images/img6.jpg') }}" alt="Traditional attire">
+                    <img src="{{ asset('images/img7.jpg') }}" alt="Floral mandap">
+                    <img src="{{ asset('images/img8.jpg') }}" alt="Traditional attire">
+                    <img src="{{ asset('images/img9.jpg') }}" alt="Floral mandap">
+                    <img src="{{ asset('images/img10.jpg') }}" alt="Traditional attire">
+
                 </div>
                 {{-- FLOATING BADGE --}}
                 <div class="mt-4 inline-flex items-center gap-3 bg-white border rounded-2xl px-5 py-3.5 shadow-lg" style="border-color: rgba(200,134,10,0.2);">
@@ -591,7 +591,7 @@
 
             <div class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 <div class="max-w-xl">
-                    <span class="section-chip !bg-white/10 !text-amber-200 !border-white/20">Saivaperumakkalperavai</span>
+                    <span class="section-chip !bg-white/10 !text-amber-200 !border-white/20">Saiva Perumakkal Peravai</span>
                     <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-5 leading-tight">
                         Begin your matrimony registration journey today
                     </h2>
@@ -616,42 +616,206 @@
 
 
 {{-- ========================= FOOTER ========================= --}}
-<footer class="footer-band">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+<footer class="relative mt-24 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black">
 
-            {{-- BRAND + LOGO --}}
-            <div class="flex items-center gap-3">
-                {{-- ★ DROP YOUR LOGO IMAGE HERE ★
-                     Replace this div with:
-                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10 rounded-xl object-contain">
-                --}}
-                <div class="w-10 h-10 rounded-xl border border-white/15 flex items-center justify-center shrink-0" style="background: rgba(255,255,255,0.08);">
-                    <span class="text-[9px] font-semibold text-white/40 uppercase leading-tight text-center">Logo</span>
+    {{-- Decorative Top --}}
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-500 to-transparent"></div>
+
+    <div class="absolute -top-24 left-0 w-72 h-72 rounded-full bg-orange-500/10 blur-3xl"></div>
+
+    <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-red-600/10 blur-3xl"></div>
+
+
+    <div class="relative max-w-7xl mx-auto px-6 py-10">
+
+        <div class="rounded-3xl
+                    border border-white/10
+                    bg-white/5
+                    backdrop-blur-xl
+                    p-6 lg:p-8
+                    shadow-[0_20px_60px_rgba(0,0,0,.4)]">
+
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+
+                {{-- LEFT --}}
+                <div class="lg:col-span-4">
+
+                    <div class="flex items-center gap-3">
+
+                        <div class="relative">
+
+                            <div class="absolute inset-0 rounded-2xl bg-orange-500 blur-lg opacity-40"></div>
+
+                            <img
+                                src="{{ asset('images/logo.jpg') }}"
+                                class="relative w-12 h-12 rounded-2xl object-cover border border-white/20">
+
+                        </div>
+
+                        <div>
+                            <h3 class="text-orange-400 text-md font-semibold leading-tight">
+                                Saiva Perumakkal Peravai
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <p class="mt-4 text-slate-400 text-sm leading-6">
+                        Helping the Saiva community find meaningful matrimonial connections, securely and trusted.
+                    </p>
+
+                    <div class="flex gap-2.5 mt-5">
+
+                        <a href="#" class="group w-9 h-9 rounded-xl bg-white/10 hover:bg-orange-500 transition flex items-center justify-center">
+                            <i class="fab fa-facebook-f text-white text-sm group-hover:scale-110 transition"></i>
+                        </a>
+
+                        <a href="#" class="group w-9 h-9 rounded-xl bg-white/10 hover:bg-pink-500 transition flex items-center justify-center">
+                            <i class="fab fa-instagram text-white text-sm group-hover:scale-110 transition"></i>
+                        </a>
+
+                        <a href="#" class="group w-9 h-9 rounded-xl bg-white/10 hover:bg-red-600 transition flex items-center justify-center">
+                            <i class="fab fa-youtube text-white text-sm group-hover:scale-110 transition"></i>
+                        </a>
+
+                        <a href="#" class="group w-9 h-9 rounded-xl bg-white/10 hover:bg-sky-500 transition flex items-center justify-center">
+                            <i class="fab fa-x-twitter text-white text-sm group-hover:scale-110 transition"></i>
+                        </a>
+
+                    </div>
+
                 </div>
-                <div>
-                    <p class="font-display text-white font-bold text-sm">Saivaperumakkalperavai</p>
-                    <p class="text-xs mt-0.5" style="color: rgba(255,255,255,0.4);">Matrimony profile registration platform</p>
+
+
+                {{-- LINKS --}}
+                <div class="lg:col-span-2">
+
+                    <h3 class="text-sm font-semibold text-white mb-4 tracking-wide uppercase">
+                        Explore
+                    </h3>
+
+                    <div class="space-y-2.5 text-sm">
+
+                        <a href="#about"
+                           class="block text-slate-400 hover:text-orange-400 transition">
+                            About
+                        </a>
+
+                        <a href="#how-it-works"
+                           class="block text-slate-400 hover:text-orange-400 transition">
+                            How it Works
+                        </a>
+
+                        <a href="#gallery"
+                           class="block text-slate-400 hover:text-orange-400 transition">
+                            Gallery
+                        </a>
+
+                        <a href="#faq"
+                           class="block text-slate-400 hover:text-orange-400 transition">
+                            FAQ
+                        </a>
+
+                    </div>
+
                 </div>
+
+
+                {{-- CONTACT --}}
+                <div class="lg:col-span-3">
+
+                    <h3 class="text-sm font-semibold text-white mb-4 tracking-wide uppercase">
+                        Contact
+                    </h3>
+
+                    <div class="space-y-2.5 text-sm text-slate-400">
+
+                        <div class="flex gap-2.5">
+                            <i class="fa-solid fa-location-dot text-orange-400 mt-0.5"></i>
+                            Tamil Nadu
+                        </div>
+
+                        <div class="flex gap-2.5">
+                            <i class="fa-solid fa-phone text-orange-400"></i>
+                            +91 9876543210
+                        </div>
+
+                        <div class="flex gap-2.5">
+                            <i class="fa-solid fa-envelope text-orange-400"></i>
+                            info@example.com
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                {{-- CTA --}}
+                <div class="lg:col-span-3">
+
+                    <a href="{{ route('profile-register.create') }}"
+                       class="group flex items-center justify-between gap-3
+                              rounded-2xl
+                              bg-gradient-to-br from-orange-500 via-orange-600 to-red-600
+                              px-5 py-4
+                              shadow-lg
+                              hover:scale-[1.02]
+                              transition">
+
+                        <div>
+                            <h3 class="text-white text-sm font-bold">
+                                Join Our Community
+                            </h3>
+                            <p class="text-orange-100 text-xs mt-0.5">
+                                Begin your journey today
+                            </p>
+                        </div>
+
+                        <span class="w-9 h-9 rounded-full bg-white text-orange-600 flex items-center justify-center shrink-0 group-hover:translate-x-0.5 transition">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </span>
+
+                    </a>
+
+                </div>
+
             </div>
 
-            {{-- LINKS --}}
-            <nav class="flex flex-wrap items-center gap-2">
-                <a href="#about" class="px-3 py-2 rounded-xl text-sm font-medium transition hover:bg-white/10" style="color: rgba(255,255,255,0.55);">About</a>
-                <a href="#how-it-works" class="px-3 py-2 rounded-xl text-sm font-medium transition hover:bg-white/10" style="color: rgba(255,255,255,0.55);">How it Works</a>
-                <a href="#gallery" class="px-3 py-2 rounded-xl text-sm font-medium transition hover:bg-white/10" style="color: rgba(255,255,255,0.55);">Gallery</a>
-                <a href="#" class="btn-primary !py-2 !px-4 !text-sm ml-2">
-                    <i class="fa-solid fa-user-plus text-xs"></i>
-                    Register
-                </a>
-            </nav>
+            <div class="my-6 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-4 text-sm">
+
+                <p class="text-slate-500">
+                    © {{ date('Y') }}
+                    <span class="text-white font-semibold">
+                        Saiva Perumakkal Peravai
+                    </span>
+                    · All Rights Reserved.
+                </p>
+
+                <div class="flex gap-6">
+
+                    <a href="#" class="text-slate-500 hover:text-white transition">
+                        Privacy Policy
+                    </a>
+
+                    <a href="#" class="text-slate-500 hover:text-white transition">
+                        Terms & Conditions
+                    </a>
+
+                    <a href="#" class="text-slate-500 hover:text-white transition">
+                        Support
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="border-t mt-8 pt-6 text-center text-xs" style="border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3);">
-            &copy; {{ date('Y') }} Saivaperumakkalperavai. All rights reserved.
-        </div>
     </div>
-</footer>
 
+</footer>
 </body>
 </html>

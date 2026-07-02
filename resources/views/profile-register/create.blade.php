@@ -195,32 +195,82 @@
                     </div>
 
                     {{-- SUBMIT CARD --}}
-                    <div class="overflow-hidden rounded-[30px] border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 shadow-sm">
-                        <div class="p-6">
-                            <div class="flex items-start gap-3">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 text-white shadow-lg shadow-emerald-100">
+                    <div class="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
+
+                        <div class="p-5">
+
+                            {{-- Header --}}
+                            <div class="flex items-start gap-4">
+
+                                <div
+                                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-lg shadow-emerald-200">
+
                                     <i class="fa-solid fa-paper-plane text-sm"></i>
+
+                                </div>
+
+                                <div class="min-w-0">
+
+                                    <h3 class="text-lg font-bold tracking-tight text-slate-800">
+                                        Submit Registration
+                                    </h3>
+
+                                    <p class="mt-1 text-sm leading-6 text-slate-500">
+                                        Once submitted, your profile will be reviewed and approved before it becomes visible to other members.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            {{-- Divider --}}
+                            <div class="my-5 border-t border-dashed border-slate-200"></div>
+
+                            {{-- Note --}}
+                            <div class="flex gap-3 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-4">
+
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-600">
+
+                                    <i class="fa-solid fa-circle-exclamation text-sm"></i>
+
                                 </div>
 
                                 <div>
-                                    <h3 class="text-lg font-bold text-slate-800">Submit Profile</h3>
-                                    <p class="mt-1 text-sm leading-6 text-slate-500">
-                                        Once submitted, your profile will be reviewed by admin before it appears publicly.
+
+                                    <p class="text-sm font-semibold text-amber-800">
+                                        Admin Approval Required
                                     </p>
+
+                                    <p class="mt-1 text-xs leading-5 text-amber-700">
+                                        Your profile will remain private until our admin reviews and approves the submitted details.
+                                    </p>
+
                                 </div>
+
                             </div>
 
-                            <div class="mt-5 rounded-2xl border border-amber-100 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-800">
-                                <span class="font-semibold">Note:</span>
-                                Submitted profiles are not shown immediately. Admin approval and status update are required before publishing.
-                            </div>
+                            {{-- Submit Button --}}
+                            <button
+                                type="submit"
+                                class="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-200 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
 
-                            <button type="submit"
-                                    class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-200/60 transition hover:translate-y-[-1px] hover:shadow-xl">
-                                <i class="fa-solid fa-paper-plane text-xs"></i>
-                                Submit Registration
+                                <span
+                                    class="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 transition group-hover:rotate-12">
+
+                                    <i class="fa-solid fa-paper-plane text-xs"></i>
+
+                                </span>
+
+
+                                <span>
+                                    Submit Registration
+                                </span>
+
                             </button>
+
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,5 +31,17 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/register-profile', [ProfileRegistrationController::class, 'create'])->name('profile-register.create');
 Route::post('/register-profile', [ProfileRegistrationController::class, 'store'])->name('profile-register.store');
+
+Route::get('/profile-register/payment/{profile}',
+    [ProfileRegistrationController::class, 'payment'])
+    ->name('profile-register.payment');
+
+Route::post('/profile-register/payment/{profile}',
+    [ProfileRegistrationController::class, 'uploadPayment'])
+    ->name('profile-register.upload-payment');
+
+Route::get('/profile-register/confirmation/{profile}',
+    [ProfileRegistrationController::class, 'confirmation'])
+    ->name('profile-register.confirmation');
 
 require __DIR__.'/auth.php';
