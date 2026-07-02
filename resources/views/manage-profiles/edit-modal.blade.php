@@ -257,6 +257,105 @@
                             </div>
                         </div>
 
+                        {{-- PAYMENT DETAILS --}}
+                        <div class="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+
+                            <div class="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
+
+                                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-50 text-sky-600">
+                                    <i class="fa-solid fa-wallet text-sm"></i>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-base font-bold text-slate-800">
+                                        Payment Details
+                                    </h4>
+
+                                    <p class="text-sm text-slate-500">
+                                        Update payment information
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="space-y-5 p-5">
+
+                                {{-- Payment Type --}}
+                                <div>
+
+                                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                                        Payment Type
+                                    </label>
+
+                                    <select
+                                        name="payment_type"
+                                        id="edit_payment_type"
+                                        class="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none transition focus:border-sky-300 focus:bg-white focus:ring-4 focus:ring-sky-100">
+
+                                        <option value="">Select Payment Type</option>
+
+                                        <option value="online">
+                                            Online
+                                        </option>
+
+                                        <option value="upi">
+                                            UPI
+                                        </option>
+
+                                        <option value="direct">
+                                            Direct
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                {{-- Payment Proof --}}
+                                <div>
+
+                                    <label class="mb-2 block text-sm font-semibold text-slate-700">
+                                        Payment Proof
+                                    </label>
+
+                                    <div
+                                        id="edit_payment_preview_wrapper"
+                                        class="hidden">
+
+                                        <img
+                                            id="edit_payment_preview"
+                                            src=""
+                                            class="h-40 w-full cursor-zoom-in rounded-2xl border border-slate-200 object-cover shadow transition hover:scale-[1.02]">
+
+                                        <p class="mt-2 text-xs text-slate-400">
+                                            Current uploaded payment proof
+                                        </p>
+
+                                    </div>
+
+                                    <div
+                                        id="edit_payment_empty"
+                                        class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-8 text-center">
+
+                                        <i class="fa-regular fa-image text-2xl text-slate-300"></i>
+
+                                        <p class="mt-3 text-sm text-slate-500">
+                                            No payment proof uploaded
+                                        </p>
+
+                                    </div>
+
+                                    <input
+                                        type="file"
+                                        name="payment_proof"
+                                        class="mt-4 block w-full rounded-2xl border border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 text-sm">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                         {{-- NOTE CARD --}}
                         <div class="rounded-[28px] border border-dashed border-emerald-200 bg-emerald-50/50 p-5">
                             <div class="flex items-start gap-3">

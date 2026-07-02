@@ -180,7 +180,93 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- PAYMENT DETAILS --}}
+                    <div class="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
+                        <div class="flex items-center gap-3 border-b border-slate-100 px-5 py-4">
+                            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-50 text-sky-600">
+                                <i class="fa-solid fa-wallet text-sm"></i>
+                            </div>
+
+                            <div>
+                                <h4 class="text-base font-bold text-slate-800">
+                                    Payment Details
+                                </h4>
+                                <p class="text-sm text-slate-500">
+                                    Payment method and uploaded proof
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 md:grid-cols-2">
+
+                            <div class="space-y-6 p-5">
+
+                                {{-- Payment Type --}}
+                                <div>
+
+                                    <p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+                                        Payment Type
+                                    </p>
+
+                                    <div id="view_payment_type">
+                                        —
+                                    </div>
+
+                                </div>
+
+                                {{-- Payment Proof --}}
+                                <div>
+
+                                    <div class="mb-3 flex items-center justify-between">
+
+                                        <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+                                            Payment Proof
+                                        </p>
+
+                                        <span class="text-xs text-slate-400">
+                Click image to enlarge
+            </span>
+
+                                    </div>
+
+                                    <div
+                                        id="view_payment_proof_wrapper"
+                                        class="hidden">
+
+                                        <img
+                                            id="view_payment_proof_image"
+                                            src=""
+                                            alt=""
+                                            class="h-44 w-full max-w-xs cursor-zoom-in rounded-2xl border border-slate-200 object-cover shadow transition duration-300 hover:scale-[1.02] hover:shadow-lg">
+
+                                    </div>
+
+                                    <div
+                                        id="view_payment_proof_empty"
+                                        class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-10 text-center">
+
+                                        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-slate-400 shadow-sm">
+
+                                            <i class="fa-regular fa-image text-xl"></i>
+
+                                        </div>
+
+                                        <p class="mt-4 text-sm font-semibold text-slate-600">
+                                            No Payment Proof Uploaded
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
+
 
                 {{-- ===================================================== --}}
                 {{-- RIGHT SIDE --}}
@@ -223,6 +309,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        {{-- Lightbox --}}
+        <div
+            id="proofLightbox"
+            class="absolute inset-0 z-50 hidden items-center justify-center rounded-[30px] bg-black/80 p-8">
+
+            <button
+                type="button"
+                id="closeProofLightbox"
+                class="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full bg-white text-slate-700 shadow">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+            <img
+                id="proofLightboxImage"
+                src=""
+                class="max-h-[85vh] max-w-full rounded-3xl shadow-2xl">
+
         </div>
 
         {{-- ===================================================== --}}

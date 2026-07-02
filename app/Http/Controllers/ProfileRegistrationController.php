@@ -82,9 +82,9 @@ class ProfileRegistrationController extends Controller
             'working_place_id' => $validated['working_place_id'] ?? null,
 
             // default guest registration status
-            'is_active' => 0,
+            'is_active' => 1,
             'is_paid' => 0,
-            'inactive_reason' => 'Pending admin approval',
+            'inactive_reason' => '-',
         ]);
 
         // =====================================================
@@ -111,8 +111,60 @@ class ProfileRegistrationController extends Controller
             ]);
         }
 
-        return redirect()
-            ->route('profile-register.create')
-            ->with('success', 'Your profile has been submitted successfully. It will be reviewed by admin before publishing.');
+        return redirect()->route(
+            'profile-register.payment',
+            $profile->id
+        );
+    }
+
+    public function payment($id)
+    {
+        $profile = \App\Models\Profile::with([
+            'gender',
+            'star',
+            'occupation',
+            'nativePlace',
+            'workingPlace',
+            'educationQualification',
+            'contacts',
+        ])->findOrFail($id);
+
+        return view(
+            'profile-register.payment',
+            compact('profile')
+        );
+    }
+
+    public function uploadPayment(Request $request, $id)
+    {
+        $profile = \App\Models\Profile::findOrFail($id);
+
+        $validated = $request->validate([
+            'payment_proof' => 'required|image|mimes:jpg,jpeg,png,webp|max:4096',
+        ]);
+
+        $path = $request
+            ->file('payment_proof')
+            ->store('payment-proofs', 'public');
+
+        $profile->update([
+            'payment_type' => 'online',
+            'payment_proof' => $path,
+        ]);
+
+        return redirect()->route(
+            'profile-register.success',
+            $profile->id
+        );
+    }
+
+    public function success($id)
+    {
+        $profile = \App\Models\Profile::findOrFail($id);
+
+        return view(
+            'profile-register.success',
+            compact('profile')
+        );
     }
 }

@@ -156,7 +156,7 @@
 
     class="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
 
-    <div class="grid lg:grid-cols-[1.15fr_0.85fr]">
+    <div class="grid ">
 
         {{-- LEFT SIDE --}}
         <div class="bg-white p-8 lg:p-8">
@@ -175,475 +175,94 @@
 
             </div>
 
-            <div class="relative mt-14">
+            @php
+                $steps = [
+                    ['icon'=>'fa-pen-to-square','from'=>'#FFE3A3','to'=>'#F2B705','badge'=>'#C98A00','glow'=>'rgba(242,183,5,0.55)','title'=>'Fill your details','desc'=>'Provide accurate information'],
+                    ['icon'=>'fa-qrcode','from'=>'#FF9CB0','to'=>'#E8546B','badge'=>'#C43654','glow'=>'rgba(232,84,107,0.55)','title'=>'Scan and pay','desc'=>'Scan the QR code and make payment'],
+                    ['icon'=>'fa-cloud-arrow-up','from'=>'#6FE0E3','to'=>'#1FA2A6','badge'=>'#137679','glow'=>'rgba(31,162,166,0.55)','title'=>'Upload proof','desc'=>'Upload your payment screenshot'],
+                    ['icon'=>'fa-shield-halved','from'=>'#B79CFF','to'=>'#7B4FE0','badge'=>'#5A34B0','glow'=>'rgba(123,79,224,0.55)','title'=>'Admin approval','desc'=>'We verify and activate your profile'],
+                ];
+            @endphp
 
-                {{-- Desktop Timeline --}}
-                <div class="hidden lg:flex items-start justify-evenly gap-3">
+            <div class="relative mt-16">
 
-                    {{-- STEP 1 --}}
-                    <div class="w-28 text-center">
+                {{-- Desktop --}}
+                <div class="hidden lg:block relative">
+                    <div class="absolute left-[10%] right-[10%] top-10 h-[3px] rounded-full"
+                         style="background-image: repeating-linear-gradient(to right, #F2B705 0 8px, transparent 8px 10px, #E8546B 10px 18px, transparent 18px 20px, #1FA2A6 20px 28px, transparent 28px 30px, #7B4FE0 30px 38px, transparent 38px 40px); background-size: 40px 3px; background-repeat: repeat-x;"></div>
 
-                        <div class="relative mx-auto w-fit">
-
-                            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-[#F4EEFF]">
-
-                                <i class="fa-solid fa-pen-to-square text-lg text-[#7C3AED]"></i>
-
+                    <div class="relative grid grid-cols-4 gap-4">
+                        @foreach($steps as $index => $step)
+                            <div class="flex flex-col items-center text-center">
+                                <div class="relative">
+                                    <div class="flex h-20 w-20 items-center justify-center rounded-full"
+                                         style="background:linear-gradient(145deg,{{ $step['from'] }},{{ $step['to'] }}); box-shadow:0 8px 18px -6px {{ $step['glow'] }};">
+                                        <i class="fa-solid {{ $step['icon'] }} text-2xl text-white"></i>
+                                    </div>
+                                    <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full text-[12px] font-bold text-white"
+                                         style="background: {{ $step['badge'] }};">
+                                        {{ $index + 1 }}
+                                    </div>
+                                </div>
+                                <h4 class="mt-7 text-[15px] font-semibold" style="color:#3D2645;">
+                                    {{ $step['title'] }}
+                                </h4>
+                                <p class="mt-2 text-[12px] leading-6 text-slate-500">
+                                    {{ $step['desc'] }}
+                                </p>
                             </div>
-
-                            <div class="absolute -bottom-2 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-[#6D28D9] text-xs font-bold text-white">
-                                1
-                            </div>
-
-                        </div>
-
-                        <h4 class="mt-7 text-[13px] font-bold text-slate-900">
-                            Fill Your Details
-                        </h4>
-
-                        <p class="mt-2 text-[11px] leading-7 text-slate-500">
-                            Provide accurate information
-                        </p>
-
+                        @endforeach
                     </div>
-
-                    {{-- ARROW --}}
-                    <div class="mt-9 flex flex-1 items-center px-2">
-
-                        <div class="h-px flex-1 border-t-2 border-dashed border-slate-300"></div>
-
-                        <i class="fa-solid fa-arrow-right mx-2 text-slate-400"></i>
-
-                    </div>
-
-                    {{-- STEP 2 --}}
-                    <div class="w-28 text-center">
-
-                        <div class="relative mx-auto w-fit">
-
-                            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#EAFBF1]">
-
-                                <i class="fa-solid fa-qrcode text-lg text-[#10B981]"></i>
-
-                            </div>
-
-                            <div class="absolute -bottom-2 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-[#10B981] text-xs font-bold text-white">
-                                2
-                            </div>
-
-                        </div>
-
-                        <h4 class="mt-7 text-[13px] font-bold text-slate-900">
-                            Scan & Pay
-                        </h4>
-
-                        <p class="mt-2 text-[11px] leading-7 text-slate-500">
-                            Scan the QR code and make payment
-                        </p>
-
-                    </div>
-
-                    {{-- ARROW --}}
-                    <div class="mt-9 flex flex-1 items-center px-2">
-
-                        <div class="h-px flex-1 border-t-2 border-dashed border-slate-300"></div>
-
-                        <i class="fa-solid fa-arrow-right mx-2 text-slate-400"></i>
-
-                    </div>
-
-                    {{-- STEP 3 --}}
-                    <div class="w-28 text-center">
-
-                        <div class="relative mx-auto w-fit">
-
-                            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#EDF6FF]">
-
-                                <i class="fa-solid fa-cloud-arrow-up text-lg text-[#2563EB]"></i>
-
-                            </div>
-
-                            <div class="absolute -bottom-2 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-[#2563EB] text-xs font-bold text-white">
-                                3
-                            </div>
-
-                        </div>
-
-                        <h4 class="mt-7 text-[13px] font-bold text-slate-900">
-                            Upload Proof
-                        </h4>
-
-                        <p class="mt-2 text-[11px] leading-7 text-slate-500">
-                            Upload payment screenshot
-                        </p>
-
-                    </div>
-
-                    {{-- ARROW --}}
-                    <div class="mt-9 flex flex-1 items-center px-2">
-
-                        <div class="h-px flex-1 border-t-2 border-dashed border-slate-300"></div>
-
-                        <i class="fa-solid fa-arrow-right mx-2 text-slate-400"></i>
-
-                    </div>
-
-                    {{-- STEP 4 --}}
-                    <div class="w-28 text-center">
-
-                        <div class="relative mx-auto w-fit">
-
-                            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#FFF3EA]">
-
-                                <i class="fa-solid fa-shield-halved text-lg text-[#EA580C]"></i>
-
-                            </div>
-
-                            <div class="absolute -bottom-2 left-0 flex h-7 w-7 items-center justify-center rounded-full bg-[#EA580C] text-xs font-bold text-white">
-                                4
-                            </div>
-
-                        </div>
-
-                        <h4 class="mt-7 text-[13px] font-bold text-slate-900">
-                            Admin Approval
-                        </h4>
-
-                        <p class="mt-2 text-[11px] leading-7 text-slate-500">
-                            We verify and activate your profile
-                        </p>
-
-                    </div>
-
                 </div>
 
-                {{-- Mobile Timeline --}}
-                <div class="space-y-8 lg:hidden">
+                {{-- Mobile --}}
+                <div class="lg:hidden relative space-y-9 pl-2">
+                    <div class="absolute left-10 top-2 bottom-2 w-[3px]"
+                         style="background-image: repeating-linear-gradient(to bottom, #F2B705 0 8px, transparent 8px 10px, #E8546B 10px 18px, transparent 18px 20px, #1FA2A6 20px 28px, transparent 28px 30px, #7B4FE0 30px 38px, transparent 38px 40px); background-size: 3px 40px;"></div>
 
-                    @php
-                        $steps = [
-                            ['icon'=>'fa-pen-to-square','bg'=>'bg-violet-100','text'=>'text-violet-600','title'=>'Fill Your Details','desc'=>'Provide accurate information'],
-                            ['icon'=>'fa-qrcode','bg'=>'bg-green-100','text'=>'text-green-600','title'=>'Scan & Pay','desc'=>'Scan the QR code and make payment'],
-                            ['icon'=>'fa-cloud-arrow-up','bg'=>'bg-blue-100','text'=>'text-blue-600','title'=>'Upload Proof','desc'=>'Upload payment screenshot'],
-                            ['icon'=>'fa-shield-halved','bg'=>'bg-orange-100','text'=>'text-orange-600','title'=>'Admin Approval','desc'=>'We verify and activate your profile'],
-                        ];
-                    @endphp
-
-                    @foreach($steps as $index=>$step)
-
-                        <div class="flex gap-3.5">
-
-                            <div class="relative">
-
-                                <div class="flex h-16 w-16 items-center justify-center rounded-full {{ $step['bg'] }}">
-
-                                    <i class="fa-solid {{ $step['icon'] }} text-2xl {{ $step['text'] }}"></i>
-
+                    @foreach($steps as $index => $step)
+                        <div class="relative flex gap-4 items-start">
+                            <div class="relative shrink-0">
+                                <div class="flex h-[72px] w-[72px] items-center justify-center rounded-full"
+                                     style="background:linear-gradient(145deg,{{ $step['from'] }},{{ $step['to'] }}); box-shadow:0 8px 18px -6px {{ $step['glow'] }};">
+                                    <i class="fa-solid {{ $step['icon'] }} text-2xl text-white"></i>
                                 </div>
-
-                                <div class="absolute -bottom-1 -left-1 flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-[11px] font-bold text-white">
-
-                                    {{ $index+1 }}
-
+                                <div class="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                                     style="background: {{ $step['badge'] }};">
+                                    {{ $index + 1 }}
                                 </div>
-
                             </div>
-
-                            <div>
-
-                                <h4 class="text-[13px] font-bold text-slate-900">
-
+                            <div class="pt-2">
+                                <h4 class="text-[15px] font-semibold" style="color:#3D2645;">
                                     {{ $step['title'] }}
-
                                 </h4>
-
-                                <p class="mt-1 text-slate-500">
-
+                                <p class="mt-1 text-[12px] leading-6 text-slate-500">
                                     {{ $step['desc'] }}
-
                                 </p>
-
                             </div>
-
                         </div>
-
                     @endforeach
-
                 </div>
 
             </div>
 
-            <div class="mt-16 rounded-2xl border border-blue-200 bg-[#EFF7FF] p-3.5">
+            <div class="mt-16 rounded-2xl p-4 pl-6 relative overflow-hidden"
+                 style="background:linear-gradient(135deg,#FFF4D6 0%,#FFE7EE 50%,#EAFBFA 100%);">
+
+                <div class="absolute left-0 top-0 bottom-0 w-[5px]"
+                     style="background:linear-gradient(to bottom,#F2B705,#E8546B,#1FA2A6,#7B4FE0);"></div>
 
                 <div class="flex items-start gap-4">
-
-                    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
-
-                        <i class="fa-solid fa-circle-info text-white"></i>
-
+                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
+                         style="background:linear-gradient(145deg,#8FE0DE,#1FA2A6); box-shadow:0 6px 14px -4px rgba(31,162,166,0.55);">
+                        <i class="fa-solid fa-circle-info text-white text-[15px]"></i>
                     </div>
-
-                    <p class="text-[11px] leading-7 text-blue-700">
-
-                        Your profile will be visible to other members only after admin approval.
-
+                    <p class="text-[12.5px] leading-7 pt-1.5" style="color:#3D2645;">
+                        Your profile will be visible to other members only after
+                        <span class="font-semibold" style="color:#137679;">admin approval</span>.
                     </p>
-
-                </div>
-
-            </div>
-        </div>
-
-        {{-- RIGHT SIDE --}}
-        <div
-            class="border-l border-slate-200 bg-gradient-to-br from-green-50 via-white to-green-50 p-8 lg:p-8">
-
-            {{-- ============================= --}}
-            {{-- RIGHT PANEL --}}
-            {{-- ============================= --}}
-
-            <div>
-
-                {{-- Header --}}
-                <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-
-                    {{-- Left --}}
-                    <div class="flex items-start gap-3">
-
-                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-emerald-400 shadow-lg sm:h-14 sm:w-14">
-
-                            <i class="fa-solid fa-qrcode text-xl text-white sm:text-2xl"></i>
-
-                        </div>
-
-                        <div>
-
-                            <h3 class="text-xl font-bold tracking-tight text-[#059669] sm:text-[22px]">
-                                Scan & Pay
-                            </h3>
-
-                            <p class="mt-2 max-w-xs text-sm leading-6 text-slate-500">
-                                Scan the QR code below with any UPI app to securely complete your registration payment.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    {{-- QR --}}
-                    <div class="flex justify-center sm:block">
-
-                        <div class="rounded-2xl border border-slate-200 bg-white p-2 shadow-md sm:p-3">
-
-                            <img
-                                src="{{ asset('images/qr.png') }}"
-                                alt="QR"
-                                class="h-28 w-28 rounded-xl object-cover sm:h-28 sm:w-28">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                {{-- Registration Fee --}}
-                <div class="mt-8 rounded-2xl border border-green-100 bg-gradient-to-br from-green-50 to-white p-3">
-
-                <span class="text-xs font-semibold uppercase tracking-widest text-green-700">
-
-                    Registration Fee
-
-                </span>
-
-                    <h2 class="mt-2 text-2xl font-extrabold text-[#16A34A]">
-
-                        ₹500
-
-                    </h2>
-
-                </div>
-
-                {{-- Account Details --}}
-                <div class="mt-4 space-y-2">
-
-                    {{-- Account Holder --}}
-                    <div class="group flex items-center rounded-xl border border-slate-200 bg-white px-3 py-2 transition-all duration-200 hover:border-violet-200 hover:shadow-md">
-
-                        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-50 text-violet-600">
-                            <i class="fa-solid fa-user text-sm"></i>
-                        </div>
-
-                        <div class="ml-3 flex-1 leading-tight">
-                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                Account Holder
-                            </p>
-
-                            <p class="mt-0.5 text-sm font-semibold text-slate-800">
-                                Demo Matrimony
-                            </p>
-                        </div>
-
-                    </div>
-
-                    {{-- UPI --}}
-                    <div class="group flex items-center rounded-xl border border-slate-200 bg-white px-3 py-2 transition-all duration-200 hover:border-blue-200 hover:shadow-md">
-
-                        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-orange-600">
-                            <i class="fa-solid fa-wallet text-sm"></i>
-                        </div>
-
-                        <div class="ml-3 flex-1 leading-tight">
-
-                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                UPI ID
-                            </p>
-
-                            <p id="upiID"
-                               class="mt-0.5 text-sm font-semibold text-slate-800">
-                                demo@upi
-                            </p>
-
-                        </div>
-
-                        <button
-                            id="copyBtn"
-                            onclick="copyUPI()"
-                            class="flex items-center gap-1 rounded-lg border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600 transition-all hover:bg-blue-100">
-
-                            <i class="fa-regular fa-copy text-xs"></i>
-
-                            <span id="copyText">
-                Copy
-            </span>
-
-                        </button>
-
-                    </div>
-
-                    {{-- Bank --}}
-                    <div class="group flex items-center rounded-xl border border-slate-200 bg-white px-3 py-2 transition-all duration-200 hover:border-blue-200 hover:shadow-md">
-
-                        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
-                            <i class="fa-solid fa-building-columns text-sm"></i>
-                        </div>
-
-                        <div class="ml-3 flex-1 leading-tight">
-
-                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                Bank
-                            </p>
-
-                            <p class="mt-0.5 text-sm font-semibold text-slate-800">
-                                State Bank Of India
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                {{-- Copy Box --}}
-                <div class="mt-3 flex items-center justify-between rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-3 py-2.5">
-
-                    <div>
-
-                        <p class="text-[10px] font-medium uppercase tracking-widest text-blue-500">
-                            UPI ID
-                        </p>
-
-                        <p class="text-sm font-semibold text-slate-800">
-                            demo@upi
-                        </p>
-
-                    </div>
-
-                    <button
-                        onclick="copyUPI()"
-                        class="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm transition hover:scale-105 hover:shadow">
-
-                        <i class="fa-regular fa-copy text-blue-600"></i>
-
-                    </button>
-
-                </div>
-
-                {{-- Success Box --}}
-                <div class="mt-3 flex items-center gap-3 rounded-xl border border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 px-3 py-2.5">
-
-                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white">
-
-                        <i class="fa-solid fa-check text-xs"></i>
-
-                    </div>
-
-                    <p class="text-[11px] leading-5 text-green-700">
-
-                        Upload the payment screenshot after completing the payment.
-
-                    </p>
-
                 </div>
             </div>
-
-            <script>
-                const copyUPI = async () => {
-
-                    const upi = document.getElementById('upiID').textContent.trim();
-
-                    try {
-
-                        await navigator.clipboard.writeText(upi);
-
-                        const btn = document.getElementById('copyBtn');
-                        const text = document.getElementById('copyText');
-
-                        btn.classList.remove(
-                            'bg-blue-50',
-                            'border-blue-100',
-                            'text-blue-600'
-                        );
-
-                        btn.classList.add(
-                            'bg-green-50',
-                            'border-green-200',
-                            'text-green-600'
-                        );
-
-                        text.textContent = 'Copied';
-
-                        btn.innerHTML = `
-            <i class="fa-solid fa-check text-xs"></i>
-            <span>Copied</span>
-        `;
-
-                        setTimeout(() => {
-
-                            btn.innerHTML = `
-                <i class="fa-regular fa-copy text-xs"></i>
-                <span>Copy</span>
-            `;
-
-                            btn.classList.remove(
-                                'bg-green-50',
-                                'border-green-200',
-                                'text-green-600'
-                            );
-
-                            btn.classList.add(
-                                'bg-blue-50',
-                                'border-blue-100',
-                                'text-blue-600'
-                            );
-
-                        }, 1800);
-
-                    } catch (error) {
-                        console.error('Failed to copy UPI ID:', error);
-                    }
-
-                };
-            </script>
         </div>
 
     </div>

@@ -27,9 +27,10 @@
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">Father Name</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">Gender</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">Age</th>
-                <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500">Native Place</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500 text-center">Status</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500 text-center">Payment</th>
+                <th class="whitespace-nowrap px-5 py-4 text-center text-xs font-bold uppercase tracking-wide text-slate-500">Payment Type</th>
+                <th class="whitespace-nowrap px-5 py-4 text-center text-xs font-bold uppercase tracking-wide text-slate-500">Payment Proof</th>
                 <th class="whitespace-nowrap px-5 py-4 text-xs font-bold uppercase tracking-wide text-slate-500 text-center">Actions</th>
             </tr>
             </thead>
@@ -59,9 +60,6 @@
                         {{ $profile->age ?? '—' }}
                     </td>
 
-                    <td class="px-5 py-4 align-top text-slate-600">
-                        {{ $profile->nativePlace->name ?? '—' }}
-                    </td>
 
                     <td class="px-5 py-4 align-top text-center">
                         @if ($profile->is_active)
@@ -91,6 +89,97 @@
                         @endif
                     </td>
 
+                    <td class="px-5 py-4 text-center">
+
+                        @switch($profile->payment_type)
+
+                            @case('online')
+                                <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-sky-200">
+
+                <span class="flex items-center justify-center bg-sky-600 px-2.5 text-white">
+                    <i class="fa-solid fa-globe text-[11px]"></i>
+                </span>
+
+                <span class="bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700">
+                    Online
+                </span>
+
+            </span>
+                                @break
+
+                            @case('upi')
+                                <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-violet-200">
+
+                <span class="flex items-center justify-center bg-violet-600 px-2.5 text-white">
+                    <i class="fa-solid fa-qrcode text-[11px]"></i>
+                </span>
+
+                <span class="bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700">
+                    UPI
+                </span>
+
+            </span>
+                                @break
+
+                            @case('direct')
+                                <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-emerald-200">
+
+                <span class="flex items-center justify-center bg-emerald-600 px-2.5 text-white">
+                    <i class="fa-solid fa-building-columns text-[11px]"></i>
+                </span>
+
+                <span class="bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+                    Direct
+                </span>
+
+            </span>
+                                @break
+
+                            @default
+                                <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-slate-200">
+
+                <span class="flex items-center justify-center bg-slate-500 px-2.5 text-white">
+                    <i class="fa-solid fa-minus text-[11px]"></i>
+                </span>
+
+                <span class="bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600">
+                    None
+                </span>
+
+            </span>
+
+                        @endswitch
+
+                    </td>
+
+
+                    <td class="px-5 py-4 text-center">
+
+                        @if($profile->payment_proof)
+
+                            <button
+                                type="button"
+                                class="preview-payment-btn inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100"
+
+                                data-image="{{ asset('storage/'.$profile->payment_proof) }}"
+                                data-name="{{ $profile->name }}">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                                Preview
+
+                            </button>
+
+                        @else
+
+                            <span class="text-slate-400">
+                                No Proof
+                            </span>
+
+                        @endif
+
+                    </td>
+
                     <td class="px-5 py-4 align-top">
                         <div class="flex flex-wrap items-center justify-center gap-2">
                             {{-- VIEW --}}
@@ -111,6 +200,8 @@
                                     data-working_place="{{ $profile->workingPlace->name ?? '—' }}"
                                     data-is_active="{{ $profile->is_active ? 1 : 0 }}"
                                     data-is_paid="{{ $profile->is_paid ? 1 : 0 }}"
+                                    data-payment_type="{{ $profile->payment_type ?? '' }}"
+                                    data-payment_proof="{{ $profile->payment_proof ? asset('storage/'.$profile->payment_proof) : '' }}"
                                     data-inactive_reason="{{ $profile->inactive_reason ?? '—' }}"
                                     data-contacts='@json($profile->contacts ?? [])'>
                                 <i class="fa-solid fa-eye text-[11px]"></i>
@@ -143,6 +234,9 @@
                                     data-occupation_id="{{ $profile->occupation_id ?? '' }}"
                                     data-native_place_id="{{ $profile->native_place_id ?? '' }}"
                                     data-working_place_id="{{ $profile->working_place_id ?? '' }}"
+
+                                    data-payment_type="{{ $profile->payment_type ?? '' }}"
+                                    data-payment_proof="{{ $profile->payment_proof ? asset('storage/'.$profile->payment_proof) : '' }}"
 
                                     data-is_active="{{ $profile->is_active ? 1 : 0 }}"
                                     data-is_paid="{{ $profile->is_paid ? 1 : 0 }}"
@@ -179,6 +273,45 @@
             @endforelse
             </tbody>
         </table>
+
+        <div
+            id="paymentProofModal"
+            class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/60 p-6">
+
+            <div
+                class="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+
+                <div
+                    class="flex items-center justify-between border-b px-6 py-4">
+
+                    <h2
+                        id="paymentProofTitle"
+                        class="text-lg font-bold text-slate-800">
+                        Payment Proof
+                    </h2>
+
+                    <button
+                        id="closePaymentProofModal"
+                        class="text-slate-500 hover:text-rose-600">
+
+                        <i class="fa-solid fa-xmark text-xl"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="p-6">
+
+                    <img
+                        id="paymentProofImage"
+                        src=""
+                        class="mx-auto max-h-[70vh] rounded-2xl border shadow">
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
     @if ($profiles->count())
@@ -186,4 +319,56 @@
             {{ $profiles->links('components.pagination.manage-profiles-pagination') }}
         </div>
     @endif
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const modal = document.getElementById('paymentProofModal');
+
+            const image = document.getElementById('paymentProofImage');
+
+            const title = document.getElementById('paymentProofTitle');
+
+            document.querySelectorAll('.preview-payment-btn').forEach(btn => {
+
+                btn.addEventListener('click', function () {
+
+                    image.src = this.dataset.image;
+
+                    title.textContent =
+                        this.dataset.name + "'s Payment Proof";
+
+                    modal.classList.remove('hidden');
+
+                    modal.classList.add('flex');
+
+                });
+
+            });
+
+            document.getElementById('closePaymentProofModal')
+                .addEventListener('click', () => {
+
+                    modal.classList.add('hidden');
+
+                    modal.classList.remove('flex');
+
+                });
+
+            modal.addEventListener('click', function (e) {
+
+                if (e.target === modal) {
+
+                    modal.classList.add('hidden');
+
+                    modal.classList.remove('flex');
+
+                }
+
+            });
+
+        });
+    </script>
+
+
 </div>

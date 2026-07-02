@@ -430,6 +430,129 @@
                 const payment = this.dataset.is_paid === '1' ? 'Paid' : 'Unpaid';
                 const inactiveReason = this.dataset.inactive_reason || '—';
 
+                const paymentType = button.dataset.payment_type;
+                const paymentProof = button.dataset.payment_proof;
+
+                // Payment Type
+                const paymentTypeDiv = document.getElementById('view_payment_type');
+
+                switch (paymentType) {
+
+                    case 'online':
+                        paymentTypeDiv.innerHTML = `
+            <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-sky-200">
+
+                <span class="flex items-center justify-center bg-sky-600 px-2.5 text-white">
+                    <i class="fa-solid fa-globe text-[11px]"></i>
+                </span>
+
+                <span class="bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700">
+                    Online
+                </span>
+
+            </span>
+        `;
+                        break;
+
+                    case 'upi':
+                        paymentTypeDiv.innerHTML = `
+            <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-violet-200">
+
+                <span class="flex items-center justify-center bg-violet-600 px-2.5 text-white">
+                    <i class="fa-solid fa-qrcode text-[11px]"></i>
+                </span>
+
+                <span class="bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700">
+                    UPI
+                </span>
+
+            </span>
+        `;
+                        break;
+
+                    case 'direct':
+                        paymentTypeDiv.innerHTML = `
+            <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-emerald-200">
+
+                <span class="flex items-center justify-center bg-emerald-600 px-2.5 text-white">
+                    <i class="fa-solid fa-building-columns text-[11px]"></i>
+                </span>
+
+                <span class="bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+                    Direct
+                </span>
+
+            </span>
+        `;
+                        break;
+
+                    default:
+                        paymentTypeDiv.innerHTML = `
+            <span class="inline-flex overflow-hidden rounded-xl shadow-sm ring-1 ring-slate-200">
+
+                <span class="flex items-center justify-center bg-slate-500 px-2.5 text-white">
+                    <i class="fa-solid fa-minus text-[11px]"></i>
+                </span>
+
+                <span class="bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600">
+                    None
+                </span>
+
+            </span>
+        `;
+                }
+
+                // Payment Proof
+                const proofWrapper = document.getElementById('view_payment_proof_wrapper');
+                const proofEmpty = document.getElementById('view_payment_proof_empty');
+                const proofImage = document.getElementById('view_payment_proof_image');
+
+                if (paymentProof) {
+
+                    proofWrapper.classList.remove('hidden');
+                    proofEmpty.classList.add('hidden');
+
+                    proofImage.src = paymentProof;
+
+                } else {
+
+                    proofWrapper.classList.add('hidden');
+                    proofEmpty.classList.remove('hidden');
+
+                }
+
+                // light box
+
+                const lightbox = document.getElementById('proofLightbox');
+                const lightboxImage = document.getElementById('proofLightboxImage');
+
+                proofImage.onclick = function () {
+
+                    lightbox.classList.remove('hidden');
+                    lightbox.classList.add('flex');
+
+                    lightboxImage.src = this.src;
+
+                };
+
+                document.getElementById('closeProofLightbox').onclick = function () {
+
+                    lightbox.classList.add('hidden');
+                    lightbox.classList.remove('flex');
+
+                };
+
+                lightbox.onclick = function (e) {
+
+                    if (e.target === lightbox) {
+
+                        lightbox.classList.add('hidden');
+                        lightbox.classList.remove('flex');
+
+                    }
+
+                };
+
                 // header
                 const profileTitle = document.getElementById('view_profile_title');
                 if (profileTitle) profileTitle.textContent = name;
@@ -590,6 +713,45 @@
                             ? this.dataset.inactive_reason
                             : '';
                 }
+
+                document.getElementById('edit_payment_type').value =
+                    button.dataset.payment_type;
+
+                // payment proof
+
+                const paymentProof = button.dataset.payment_proof;
+
+                const preview = document.getElementById('edit_payment_preview');
+                const wrapper = document.getElementById('edit_payment_preview_wrapper');
+                const empty = document.getElementById('edit_payment_empty');
+
+                if (paymentProof) {
+
+                    preview.src = paymentProof;
+
+                    wrapper.classList.remove('hidden');
+
+                    empty.classList.add('hidden');
+
+                } else {
+
+                    wrapper.classList.add('hidden');
+
+                    empty.classList.remove('hidden');
+
+                }
+
+                preview.onclick = function () {
+
+                    document.getElementById('proofLightboxImage').src = this.src;
+
+                    document.getElementById('proofLightbox')
+                        .classList.remove('hidden');
+
+                    document.getElementById('proofLightbox')
+                        .classList.add('flex');
+
+                };
 
                 let contacts = [];
                 try {

@@ -32,16 +32,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/register-profile', [ProfileRegistrationController::class, 'create'])->name('profile-register.create');
 Route::post('/register-profile', [ProfileRegistrationController::class, 'store'])->name('profile-register.store');
 
-Route::get('/profile-register/payment/{profile}',
-    [ProfileRegistrationController::class, 'payment'])
+Route::get('/profile-register/payment/{id}', [ProfileRegistrationController::class, 'payment'])
     ->name('profile-register.payment');
 
-Route::post('/profile-register/payment/{profile}',
-    [ProfileRegistrationController::class, 'uploadPayment'])
+Route::post('/profile-register/payment/{id}', [ProfileRegistrationController::class, 'uploadPayment'])
     ->name('profile-register.upload-payment');
 
-Route::get('/profile-register/confirmation/{profile}',
-    [ProfileRegistrationController::class, 'confirmation'])
-    ->name('profile-register.confirmation');
+Route::get('/profile-register/success/{id}', [ProfileRegistrationController::class, 'success'])
+    ->name('profile-register.success');
 
 require __DIR__.'/auth.php';
